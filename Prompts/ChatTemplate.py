@@ -1,3 +1,8 @@
+# (1) Verbose / role-based templates — older but explicit.
+# Use when you need fine-grained control of system/AI/human messages
+# (different templates per role) or want to inspect/modify messages before sending.
+# Slightly more boilerplate; .to_messages() produces the messages list for model.invoke().
+
 """"
 import os
 from dotenv import load_dotenv
@@ -27,6 +32,14 @@ print(response.content)
 #from_template() → simple, single message
 
 #Below we have used .from_template()
+
+
+
+# (2) Single-template + composable pipeline (ChatPromptTemplate.from_template).
+# Modern, compact pattern. Great for simple prompts and reuse.
+# Works well with the `prompt | model` pipeline for clean composition.
+# Use this for most simple use-cases where per-role customization isn't needed.
+
 """"
 import os
 from dotenv import load_dotenv
@@ -55,6 +68,12 @@ print(response.content)
 """
 
 
+
+# (3) Hybrid: define multi-role template then format to messages.
+# Cleaner than (1) because you don't manually create System/AI/Human templates,
+# but still explicit — useful if you want to format and then inspect messages.
+# Good for debugging or when you need the messages object for other tooling.
+
 """"
 import os
 from dotenv import load_dotenv
@@ -82,6 +101,9 @@ print(response.content)
 
 
 
+# (4) Recommended modern pattern: multi-role prompt + pipeline composition.
+# Combines clarity of role-based prompts with the brevity and composability of `|`.
+# Best for production: pass a dict to chain.invoke(), less boilerplate, easy to extend.
 
 import os
 from dotenv import load_dotenv
