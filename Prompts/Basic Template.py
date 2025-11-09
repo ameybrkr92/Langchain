@@ -62,3 +62,5 @@ prompt_multi_input = PromptTemplate(input_variables=[], template="Tell me a fact
 formatted_prompt=prompt_multi_input.invoke({'topic':"Jupiter", 'level':"Graduate"})
 response=model.invoke(formatted_prompt)
 print(response.content)
+
+PromptTemplate()
