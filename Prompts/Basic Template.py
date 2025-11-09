@@ -40,3 +40,25 @@ response = model.invoke(prompt_no_input.format())
 print(response.content)
 """
 #Output: The world's largest animal is the blue whale, which can grow up to 100 feet in length and weigh over 200 tons.
+""""
+prompt_single_input = PromptTemplate(input_variables=['topic'], template="Tell me a fact about {topic}")
+"""
+#print(prompt_single_input.format(topic= "Mars"))
+
+#formatted = prompt_single_input.format(topic = "Ocean")
+#either use .format like above or .invoke like below to get formatted template
+""""
+formatted = prompt_single_input.invoke({"topic": "Mars"})
+"""
+#get response
+""""
+response = model.invoke(formatted)
+print(response.content)
+"""
+
+prompt_multi_input = PromptTemplate(input_variables=[], template="Tell me a fact about {topic} for a {level} student")
+
+#formatted_prompt=prompt_multi_input.format(topic="Jupyter", level ="graduate")
+formatted_prompt=prompt_multi_input.invoke({'topic':"Jupiter", 'level':"Graduate"})
+response=model.invoke(formatted_prompt)
+print(response.content)
