@@ -30,11 +30,7 @@ Few-shot = You give a few examples before the actual task.
 #✅ Example: Sentiment classification (Few-Shot)
 
 from langchain_openai import ChatOpenAI
-from langchain_core.prompts import (
-    ChatPromptTemplate,
-    FewShotChatMessagePromptTemplate,
-    ChatMessagePromptTemplate,
-)
+from langchain_core.prompts import ChatPromptTemplate,FewShotChatMessagePromptTemplate,ChatMessagePromptTemplate
 
 # Define examples
 examples = [
