@@ -80,18 +80,20 @@ Simplifies usage with LLMs
 # But since PromptTemplate inherits from StringPromptTemplate, you use it as if it were part of PromptTemplate. It’s not exclusive to PromptTemplate, but you will call it on PromptTemplate objects in practice.
 
 formatted_prompt_1=prompt_multi_input.format(topic="Jupiter", level="Graduate")
-#or formatted_prompt=prompt_multi_input.format(topic="Jupyter", level ="graduate")
-print(prompt_multi_input.format(topic="Jupiter", level="Graduate"))
+print(formatted_prompt_1)
 #text='Tell me a fact about Jupiter for a Graduate student'
-print(type(prompt_multi_input.format(topic="Jupiter", level="Graduate")))
+print(type(formatted_prompt_1))
+#<class 'str'>
+
+#using .invoke method instead of .format
+formatted_prompt_2=prompt_multi_input.invoke({'topic':"Jupiter", 'level':"Graduate"})
+print(formatted_prompt_2)
+#text='Tell me a fact about Jupiter for a Graduate student'
+print(type(formatted_prompt_2))
 #<class 'langchain_core.prompt_values.StringPromptValue'>
 
+response_1=model.invoke(formatted_prompt_1)
+print(response_1.content)
 
-formatted_prompt=prompt_multi_input.invoke({'topic':"Jupiter", 'level':"Graduate"})
-print(formatted_prompt)
-#text='Tell me a fact about Jupiter for a Graduate student'
-print(type(formatted_prompt))
-#<class 'langchain_core.prompt_values.StringPromptValue'>
-
-response=model.invoke(formatted_prompt)
-print(response.content)
+response_2=model.invoke(formatted_prompt_2)
+print(response_2.content)
