@@ -57,10 +57,13 @@ print(response.content)
 """
 
 prompt_multi_input = PromptTemplate(input_variables=[], template="Tell me a fact about {topic} for a {level} student")
-
+print(prompt_multi_input)
+print(type(prompt_multi_input))
+print(prompt_multi_input.format_prompt({'topic':"Jupiter", 'level':"Graduate"}))
+print(type(prompt_multi_input.format_prompt({'topic':"Jupiter", 'level':"Graduate"})))
 #formatted_prompt=prompt_multi_input.format(topic="Jupyter", level ="graduate")
 formatted_prompt=prompt_multi_input.invoke({'topic':"Jupiter", 'level':"Graduate"})
+print(formatted_prompt)
+print(type(formatted_prompt))
 response=model.invoke(formatted_prompt)
 print(response.content)
-
-PromptTemplate()
