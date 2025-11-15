@@ -1,9 +1,9 @@
 # (1) Verbose / role-based templates — older but explicit.
 # Use when you need fine-grained control of system/AI/human messages
-# (different templates per role) or want to inspect/modify messages before sending.
-# Slightly more boilerplate; .to_messages() produces the messages list for model.invoke().
+# (different templates per role) or want to inspect/modify messages before sending. slightly more boilerplate; 
+# .to_messages() produces the messages list for model.invoke().
 
-""""
+'''
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -20,10 +20,14 @@ human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
 chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
 # get a chat completion from the formatted messages
 
-prompt = chat_prompt.format_prompt(cooking_time="15 min", dietary_preference="Vegan", recipe_request="Quick Snack").to_messages()
+#prompt = chat_prompt.format_prompt(cooking_time="15 min", dietary_preference="Vegan", recipe_request="Quick Snack").to_messages()
+prompt = chat_prompt.format_messages(cooking_time="15 min", dietary_preference="Vegan", recipe_request="Quick Snack")
+print(prompt)
 response=model.invoke(prompt)
 print(response.content)
-"""
+'''
+
+
 
 #Above LangChain code is outdated compared to the latest LangChain and best practices.
 #You can now directly use ChatPromptTemplate with placeholders and pass it to the model without manually creating individual message templates(like systemtemplate, humantemplate, AItemplate).
@@ -40,7 +44,7 @@ print(response.content)
 # Works well with the `prompt | model` pipeline for clean composition.
 # Use this for most simple use-cases where per-role customization isn't needed.
 
-""""
+'''
 import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -50,23 +54,21 @@ load_dotenv()
 
 model = ChatOpenAI(model="gpt-4o-mini")  # or gpt-4-turbo, gpt-3.5-turbo, etc.
 
-prompt = ChatPromptTemplate.from_template(
+chat_prompt = ChatPromptTemplate.from_template(
     "You are an AI recipe assistant that specializes in {dietary_preference} dishes "
     "that can be prepared in {cooking_time}. "
     "Suggest a recipe for {recipe_request}."
 )
+messages = chat_prompt.format_messages(
+    cooking_time="15 min",
+    dietary_preference= "Vegan",
+    recipe_request= "Quick Snack"
+)
 
-chain = prompt | model  # composable pipeline
-response = chain.invoke({
-    "cooking_time": "15 min",
-    "dietary_preference": "Vegan",
-    "recipe_request": "Quick Snack"
-})
-
+response = model.invoke(messages)
 print(response.content)
 
-"""
-
+'''
 
 
 # (3) Hybrid: define multi-role template then format to messages.
