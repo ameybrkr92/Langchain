@@ -27,6 +27,10 @@ Return the person details in JSON format matching this schema:
 
 """)
 ]).partial(format_instructions=parser.get_format_instructions())
+
+#either you can do partial and pass format instruction as above or you can pass it in invoke as input variable
+#result = chain.invoke({"format_instructions": parser.get_format_instructions()})
+
 '''
 chain = prompt | llm_model | parser
 
