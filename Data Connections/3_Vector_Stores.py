@@ -27,3 +27,32 @@ vectorstore = Chroma.from_documents(
     persist_directory="Data Connections/chroma_db"
 ) 
 #print(help(vectorstore))
+#These 5 attributes tell you what is inside:
+
+#✔ _collection
+#This is the actual underlying Chroma database collection
+#by default langchian explicity names collection as langchain, 
+#you can set parameter while defining vectorestore to rename it to something else
+print(vectorstore._collection)
+#Output: Collection(name=langchain)
+
+#to see documents
+#This returns metadata for each stored document chunk.
+#data_stored=vectorstore._collection.get()
+#print(data_stored)
+
+#If you want only embeddings:
+data_stored=vectorstore._collection.get(include=["embeddings"])
+#print((data_stored))
+
+#If you want embeddings, docs & matadata:
+'''
+data_stored=vectorstore._collection.get(include=["embeddings", "documents", "metadatas"])
+print((data_stored))
+'''
+
+#To see only the IDs
+#print(vectorstore._collection.get()["ids"])
+
+#to see how many vectors are stored
+print(len(vectorstore._collection.get()["ids"]))
