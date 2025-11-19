@@ -1,0 +1,13 @@
+print(type(vectorstore))
+<class 'langchain_chroma.vectorstores.Chroma'>
+
+✅ vectorstore is an instance (object) of the class Chroma
+
+The module is: langchain_chroma.vectorstores
+
+The class is: Chroma
+
+Your variable vectorstore is an object created from that class.
+
+✅ 1. See all attributes & methods
+dir(vectorstore)

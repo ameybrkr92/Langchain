@@ -6,7 +6,7 @@ pdf_loader = PyPDFLoader("Data Connections\Attention is all you need - Research 
 
 pdf_docs = pdf_loader.load()
 
-#print(pdf_docs)
+print(pdf_docs)
 #print(len(pdf_docs))
 #print(pdf_docs[0].page_content)
 #print(pdf_docs[1].metadata)
