@@ -2,12 +2,6 @@
 
 > **Contents added:** Code examples for all chain patterns, visual diagrams (ASCII + pointers), a condensed cheatsheet, a full RAG example, and a Router chain example where an LLM routes queries. There's also the screenshot you uploaded embedded below.
 
----
-
-![uploaded screenshot](/mnt/data/848e5f7f-866f-4863-9d20-2a47350146d0.png)
-
----
-
 ## 1. Sequential Chains (Pipeline Chains)
 
 **Definition:** A linear flow of runnables connected using the `|` operator.
@@ -247,13 +241,4 @@ router = llm_router
 - For RAG, sanitize and truncate `context` to avoid token overflow.
 - For routers, guard against label drift — keep a small, robust prompt + examples.
 - Test each runnable individually before composing.
-
----
-
-## 9. Next steps (pick one)
-1. Add runnable-tested Python scripts (with imports & environment notes).
-2. Add visual SVG/PNG diagrams (I can embed your images).  
-3. Convert the RAG example to a runnable demo using a local FAISS/Chroma store.
-
-Tell me **which one** you'd like next (type 1, 2, or 3).
 
