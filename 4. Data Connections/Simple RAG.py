@@ -1,3 +1,5 @@
+#Load → Split → Embed → Store → Retrieve → RAG Chain → Query
+
 #1. Document Loader
 from langchain_community.document_loaders import PyPDFLoader,CSVLoader, WebBaseLoader
 
